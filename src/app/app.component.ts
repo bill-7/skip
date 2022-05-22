@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'skip-fe';
 
 
-  client = new Colyseus.Client('ws://localhost:2567')
+  client = new Colyseus.Client('ws://honey-breezy-piranha.glitch.me/:2567')
 
   ngOnInit() {
     // this.client.getAvailableRooms().then(console.log)
