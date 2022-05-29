@@ -10,7 +10,6 @@ import { Player } from './Player'
 import { Piles } from './Piles'
 
 export class MyRoomState extends Schema {
-  @type({ map: Player }) public player1: MapSchema<Player> = new MapSchema<Player>();
-  @type({ map: Player }) public player2: MapSchema<Player> = new MapSchema<Player>();
+  @type({ map: Player }) public players: MapSchema<Player> = new MapSchema<Player>();
   @type({ map: Piles }) public piles: MapSchema<Piles> = new MapSchema<Piles>();
 }

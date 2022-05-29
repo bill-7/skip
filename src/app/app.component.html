@@ -1,7 +1,38 @@
-<button (click)="click('🍏')">🍏</button>
-<button (click)="click('🍌')">🍌</button>
-<button (click)="click('🍒')">🍒</button><br><br>
+<div>
+  <mat-grid-list class="m1" cols="10" rowHeight="32vh">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <app-card [n]="12"></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="5" [rowspan]="1">
+      <app-card *ngFor="let c of [0,1,2,3,4]" [n]="c"></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">
+      <app-card *ngFor="let c of [5,6,7,8]" [n]="c"></app-card>
+    </mat-grid-tile>
 
-<div *ngFor="let message of messages">
-  <span>{{ message }}</span>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">
+      <app-card *ngFor="let c of [0,1,2,3]" [n]="c"></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <app-card [n]="69"></app-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4" [rowspan]="1">
+      <app-card *ngFor="let c of [0,1,2,3]" [n]="c"></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="5" [rowspan]="1">
+      <app-card *ngFor="let c of [0,1,2,3,4]" [n]="c"></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <app-card [n]="13"></app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+
+  <div *ngFor="let message of messages">
+    <span>{{ message }}</span>
+  </div>
 </div>

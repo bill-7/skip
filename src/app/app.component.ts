@@ -9,22 +9,21 @@ import { MyRoomState } from 'src/schemas/MyRoomState';
 })
 export class AppComponent implements OnInit {
   title = 'skip-fe';
-
-  messages: any[] = [];
+  messages = []
+  layout = [
+    { cols: 3, rows: 1 },
+    { cols: 3, rows: 1 },
+    { cols: 3, rows: 1 },
+  ]
   room!: Colyseus.Room<MyRoomState>
-  client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
+  // client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
+  client = new Colyseus.Client('ws://localhost:2567')
+
 
   ngOnInit() {
     this.client.joinOrCreate("my_room").then(room => {
       this.room = room as Colyseus.Room<MyRoomState>
       console.log(room.sessionId, "joined", room.name);
-
-      room.onMessage("state", (broadcast) => {
-        console.log(broadcast)
-        // if (String(message).startsWith(this.room.sessionId))
-        //   message += " (you)"
-        // this.messages.push(message);
-      });
 
       room.onStateChange((changes) => {
         console.log(changes)
@@ -38,7 +37,7 @@ export class AppComponent implements OnInit {
     }).catch(console.error)
   }
 
-  click(fruit: string) {
-    if (this.room) this.room.send("state", { slot1: [1, 2, 3] })
+  draw() {
+    this.room?.send("draw")
   }
 }

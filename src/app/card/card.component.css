@@ -1,0 +1,29 @@
+.card-wrapper {
+  margin: 0.5rem;
+  padding: 0.75rem;
+  border: white solid 5px;
+}
+
+.number {
+  font-size: 5rem;
+  color: #fff;
+  text-shadow: 0px 0.075rem #757575;
+  width: 5rem;
+  text-align: center;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+p {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mat-card {
+  border-radius: 0.75rem;
+}
+
+.mat-card-content {
+  margin: 0px;
+  padding: 0px;
+}
