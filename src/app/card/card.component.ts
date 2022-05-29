@@ -17,19 +17,18 @@ export class CardComponent implements OnInit {
   }
 
   colour(n: number) {
-    //list of 12 rainbow colours flowing from red to pink
     const colours = [
-      'f8bbd0',
-      'e1bee7',
-      'c5cae9',
-      'b3e5fc',
-      'b2dfdb',
-      'dcedc8',
-      'fff59d',
-      'ffcc80',
-      'ffccbc',
-
+      'f8bbd0', 'e1bee7', 'c5cae9', 'b3e5fc', 'b2dfdb', 'dcedc8',
+      'fff59d', 'ffcc80', 'ffccbc',
     ]
-    return '#' + colours[n]
+    if (n > 12) return {
+      background: "#f0f0f0",
+      border: "5px solid #e5e5e5",
+      elevation: 0
+    }
+    return {
+      background: '#' + colours[n],
+
+    }
   }
 }
