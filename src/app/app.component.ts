@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { MyRoomState } from 'src/schemas/MyRoomState';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-root',

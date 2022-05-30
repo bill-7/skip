@@ -17,18 +17,12 @@ export class CardComponent implements OnInit {
   }
 
   colour(n: number) {
-    const colours = [
-      'f8bbd0', 'e1bee7', 'c5cae9', 'b3e5fc', 'b2dfdb', 'dcedc8',
-      'fff59d', 'ffcc80', 'ffccbc',
-    ]
     if (n > 12) return {
       background: "#f0f0f0",
-      border: "5px solid #e5e5e5",
-      elevation: 0
+      border: "5px solid #e5e5e5"
     }
     return {
-      background: '#' + colours[n],
-
+      background: `hsl(${(n - 1) * 25}, 100%, 78%)`
     }
   }
 }
