@@ -1,34 +1,41 @@
 <div>
   <mat-grid-list cdkDropListGroup class="m1" cols="10" rowHeight="32vh">
     <mat-grid-tile [colspan]="5" [rowspan]="1">
-      <app-card cdkDrag *ngFor="let c of opponent?.hand" [n]="c"></app-card>
+      <app-card *ngFor="let c of opponent?.hand" [n]="c"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <app-card cdkDrag [n]="opponent?.stock?.at(-1) || 14"></app-card>
+      <app-card [n]="opponent?.stock?.at(-1) || 14"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="1">
-      <app-card cdkDrag *ngFor="let c of [14,14,14,14]" [n]="c"></app-card>
+      <app-card *ngFor="let c of [14,14,14,14]" [n]="c"></app-card>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <span>{{room?.state | json}}</span>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="1">
-      <app-card *ngFor="let c of [14,14,14,14]" [n]="c"></app-card>
+      <div *ngFor="let pile of piles, let i = index">
+        <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="piles[i]"
+          (cdkDropListDropped)="drop($event,'pile'+pile, 'player.hand')">
+          <app-card [n]="pile.at(0) || 14"></app-card>
+        </div>
+      </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <app-card (click)="draw()" [n]="13"></app-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="2" [rowspan]="1"></mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <span>{{player | json}} <br><br> {{piles | json}}</span>
+    </mat-grid-tile>
 
     <mat-grid-tile cdkDropList [colspan]="4" [rowspan]="1">
-      <app-card cdkDrag *ngFor="let c of [14,14,14,14]" [n]="c"></app-card>
+      <app-card *ngFor="let c of [14,14,14,14]" [n]="c"></app-card>
     </mat-grid-tile>
-    <mat-grid-tile cdkDropList [colspan]="1" [rowspan]="1">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
       <app-card cdkDrag [n]="player.stock?.at(-1) || 14"></app-card>
     </mat-grid-tile>
-    <mat-grid-tile cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event, 'player.hand')"
-      [colspan]="5" [rowspan]="1">
+    <mat-grid-tile cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="player.hand"
+      (cdkDropListDropped)="drop($event, 'player.hand', 'player.hand')" [colspan]="5" [rowspan]="1">
       <app-card cdkDrag *ngFor="let c of player.hand" [n]="c"></app-card>
     </mat-grid-tile>
   </mat-grid-list>

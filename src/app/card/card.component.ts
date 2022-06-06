@@ -26,11 +26,9 @@ export class CardComponent implements OnInit {
       border: "5px solid #e5e5e5"
     }
     if (n == 13) return {
-      'font-size': 4,
       background: `linear-gradient(180deg, rgba(255,90,90,1) 0%, rgba(255,179,103,1) 20%, rgba(255,253,116,1) 40%, rgba(141,255,130,1) 60%, rgba(139,213,234,1) 80%, rgba(206,157,255,1) 100%)`
     }
     if (n <= 12 && n >= 1) return {
-      'font-size': '4rem',
       background: `hsl(${(n - 1) * 25}, 100%, 78%)`
     }
     if (n == 0) return {

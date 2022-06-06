@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { MyRoomState } from 'src/schemas/MyRoomState';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Piles } from 'src/schemas/Piles';
-import { Player } from 'src/schemas/Player';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +12,7 @@ export class AppComponent implements OnInit {
   default = () => ({ hand: [] as number[], stock: [] as number[] })
 
   messages = []
-  piles: Piles = new Piles
+  piles = [[14], [14], [14], [14]]
   player = this.default()
   opponent = this.default()
   room!: Colyseus.Room<MyRoomState>
@@ -39,7 +36,7 @@ export class AppComponent implements OnInit {
           this.player.stock = [...p.stock.values()]
         }
         if (op) {
-          this.opponent.hand = [...op.hand.values()]
+          this.opponent.hand = [...op.hand.values()].map(() => 13)
           this.opponent.stock = [...op.stock.values()]
         }
       });
@@ -51,8 +48,19 @@ export class AppComponent implements OnInit {
     this.room?.send("draw")
   }
 
-  drop(event: any, source: string) {
+  drop(event: CdkDragDrop<number[]>, prev: string, next: string) {
     console.log(event)
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
 
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.room.send("state", { prev, next })
+    }
   }
 }
