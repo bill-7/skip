@@ -7,9 +7,11 @@
 
 import { Schema, type, ArraySchema, MapSchema, SetSchema, DataChange } from '@colyseus/schema';
 import { Player } from './Player'
-import { Piles } from './Piles'
 
 export class MyRoomState extends Schema {
   @type({ map: Player }) public players: MapSchema<Player> = new MapSchema<Player>();
-  @type({ map: Piles }) public piles: MapSchema<Piles> = new MapSchema<Piles>();
+  @type(["number"]) public pile_1: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile_2: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile_3: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile_4: ArraySchema<number> = new ArraySchema<number>();
 }

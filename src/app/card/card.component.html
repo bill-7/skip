@@ -1,5 +1,10 @@
 <mat-card [style]="colour(n)" [class.mat-elevation-z0]="n > 12" class="card-wrapper">
   <mat-card-content>
-    <p class="number">{{ n > 12 ? '&nbsp;' : n }}</p>
+    <p class="number">
+      {{n == 0 ? '💫'
+      : n == 13 ? "🌈"
+      : n == 14 ? '&nbsp;'
+      : n
+      }}</p>
   </mat-card-content>
 </mat-card>
