@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   default = () => ({ hand: [] as number[], stock: [] as number[] })
 
   messages = []
-  piles = [[14], [14], [14], [14]]
+  piles: number[][] = []
   player = this.default()
   opponent = this.default()
   room!: Colyseus.Room<MyRoomState>
@@ -27,25 +27,36 @@ export class AppComponent implements OnInit {
       this.room = room as Colyseus.Room<MyRoomState>
       console.log(room.sessionId, "joined", room.name);
 
-      room.onStateChange((_: unknown) => {
-        const opId = [...this.ps().keys()].find(k => k != room.sessionId)
-        const p = this.ps().get(room.sessionId)
-        const op = this.ps().get(opId!)
-        if (p) {
-          this.player.hand = [...p.hand.values()]
-          this.player.stock = [...p.stock.values()]
-        }
-        if (op) {
-          this.opponent.hand = [...op.hand.values()].map(() => 13)
-          this.opponent.stock = [...op.stock.values()]
-        }
-      });
+      room.onStateChange(this.handleStateUpdate);
 
     }).catch(console.error)
   }
 
+  handleStateUpdate = (_: unknown) => {
+    const opId = [...this.ps().keys()].find(k => k != this.room.sessionId)
+    const p = this.ps().get(this.room.sessionId)
+    const op = this.ps().get(opId!)
+    if (p) {
+      this.player.hand = [...p.hand.values()]
+      this.player.stock = [...p.stock.values()]
+    }
+    if (op) {
+      this.opponent.hand = [...op.hand.values()].map(() => 13)
+      this.opponent.stock = [...op.stock.values()]
+    }
+    [0, 1, 2, 3].map(i => this.piles = [...(this.room.state as any)["pile" + i].values()])
+  }
+
   draw() {
     this.room?.send("draw")
+  }
+
+  updateServerState() {
+    this.room.send("state", {
+      "player.hand": this.player.hand,
+      "player.stock": this.player.stock,
+      "piles": this.piles
+    })
   }
 
   drop(event: CdkDragDrop<number[]>, prev: string, next: string) {
@@ -60,7 +71,8 @@ export class AppComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      this.room.send("state", { prev, next })
+      this.updateServerState()
+
     }
   }
 }

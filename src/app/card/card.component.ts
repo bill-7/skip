@@ -12,8 +12,6 @@ export class CardComponent implements OnInit {
   @Input() n!: number;
 
   ngOnInit(): void {
-    if (this.n == undefined)
-      this.n = Math.floor(Math.random() * 12)
   }
 
   colour(n: number) {
@@ -32,7 +30,7 @@ export class CardComponent implements OnInit {
       background: `hsl(${(n - 1) * 25}, 100%, 78%)`
     }
     if (n == 0) return {
-      background: `linear-gradient(0deg, rgba(255,244,76,1) 0%, rgba(252,176,69,1) 100%)`
+      background: `linear-gradient(0deg, rgba(246,245,148,1) 0%, rgba(255,158,0,1) 100%)`
     }
     return
   }

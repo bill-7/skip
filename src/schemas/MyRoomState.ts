@@ -10,8 +10,6 @@ import { Player } from './Player'
 
 export class MyRoomState extends Schema {
   @type({ map: Player }) public players: MapSchema<Player> = new MapSchema<Player>();
-  @type(["number"]) public pile_1: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public pile_2: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public pile_3: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public pile_4: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public piles: ArraySchema<ArraySchema<number>> = new ArraySchema<ArraySchema<number>>();
+
 }

@@ -17,7 +17,7 @@
       <div *ngFor="let pile of piles, let i = index">
         <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="piles[i]"
           (cdkDropListDropped)="drop($event,'pile'+pile, 'player.hand')">
-          <app-card [n]="pile.at(0) || 14"></app-card>
+          <app-card [n]="pile[0] >= 0 ? pile[0] : 14 "></app-card>
         </div>
       </div>
     </mat-grid-tile>
