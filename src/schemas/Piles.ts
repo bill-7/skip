@@ -9,8 +9,8 @@ import { Schema, type, ArraySchema, MapSchema, SetSchema, DataChange } from '@co
 
 
 export class Piles extends Schema {
-  @type(["number"]) public play_1: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public play_2: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public play_3: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public play_4: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile1: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile2: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile3: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public pile4: ArraySchema<number> = new ArraySchema<number>();
 }

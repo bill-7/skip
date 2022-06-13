@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { MyRoomState } from 'src/schemas/MyRoomState';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Piles } from 'src/schemas/Piles';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,20 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  default = () => ({ hand: [] as number[], stock: [] as number[] })
+  default = () => ({
+    hand: [] as number[],
+    stock: [] as number[],
+    bench: [] as number[]
+  })
 
   messages = []
-  piles: number[][] = []
+  piles = [] as number[][]
   player = this.default()
   opponent = this.default()
   room!: Colyseus.Room<MyRoomState>
 
-  // client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
-  client = new Colyseus.Client('ws://localhost:2567')
+  client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
+  // client = new Colyseus.Client('ws://localhost:2567')
 
   ps = () => this.room.state.players
 
@@ -44,7 +49,10 @@ export class AppComponent implements OnInit {
       this.opponent.hand = [...op.hand.values()].map(() => 13)
       this.opponent.stock = [...op.stock.values()]
     }
-    [0, 1, 2, 3].map(i => this.piles = [...(this.room.state as any)["pile" + i].values()])
+    [0, 1, 2, 3].map(i => {
+      const p = (this.room.state.piles.get("pile") as any)["pile" + (i + 1)]
+      if (p) this.piles[i] = [...p?.values()]
+    })
   }
 
   draw() {
@@ -55,11 +63,12 @@ export class AppComponent implements OnInit {
     this.room.send("state", {
       "player.hand": this.player.hand,
       "player.stock": this.player.stock,
+      "player.bench": this.player.bench,
       "piles": this.piles
     })
   }
 
-  drop(event: CdkDragDrop<number[]>, prev: string, next: string) {
+  drop(event: CdkDragDrop<number[]>) {
     console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
