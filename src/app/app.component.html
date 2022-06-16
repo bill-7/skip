@@ -38,7 +38,8 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <div cdkDropList>
+      <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="player.stock"
+        (cdkDropListDropped)="drop($event)">
         <app-card cdkDrag [n]="player.stock[0] >= 0 ? player.stock[0] : 14"></app-card>
       </div>
     </mat-grid-tile>
