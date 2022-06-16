@@ -25,7 +25,8 @@
       <app-card (click)="draw()" [n]="13"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <span>bench: {{player.bench | json}} <br><br>hand: {{player.hand | json}}</span>
+      <span>bench: {{player.bench | json}} <br><br>hand: {{player.hand | json}}
+        <br><br>piles: {{piles | json}}</span>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="4" [rowspan]="1">
@@ -37,7 +38,9 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <app-card cdkDrag [n]="player.stock?.at(0) || 14"></app-card>
+      <div cdkDropList>
+        <app-card cdkDrag [n]="player.stock[0] >= 0 ? player.stock[0] : 14"></app-card>
+      </div>
     </mat-grid-tile>
     <mat-grid-tile cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="player.hand"
       (cdkDropListDropped)="drop($event)" [colspan]="5" [rowspan]="1">
