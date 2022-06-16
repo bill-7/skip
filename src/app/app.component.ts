@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
   opponent = this.default()
   room!: Colyseus.Room<MyRoomState>
 
-  // client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
-  client = new Colyseus.Client('ws://localhost:2567')
+  client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
+  // client = new Colyseus.Client('ws://localhost:2567')
 
   ps = () => this.room.state.players
 
