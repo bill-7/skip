@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   default = () => ({
     hand: [] as number[],
     stock: [] as number[],
-    bench: [] as number[]
+    bench: [[], [], [], []] as number[][]
   })
 
   messages = []
@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
   opponent = this.default()
   room!: Colyseus.Room<MyRoomState>
 
-  client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
-  // client = new Colyseus.Client('ws://localhost:2567')
+  // client = new Colyseus.Client('wss://honey-breezy-piranha.glitch.me/:2567')
+  client = new Colyseus.Client('ws://localhost:2567')
 
   ps = () => this.room.state.players
 
@@ -43,11 +43,19 @@ export class AppComponent implements OnInit {
     const op = this.ps().get(opId!)
     if (p) {
       this.player.hand = [...p.hand.values()]
-      this.player.stock = [...p.stock.values()]
+      this.player.stock = [...p.stock.values()];
+      [0, 1, 2, 3].map(i => {
+        const b = (p as any)["bench" + (i + 1)]
+        if (b) this.player.bench[i] = [...b?.values()]
+      })
     }
     if (op) {
       this.opponent.hand = [...op.hand.values()].map(() => 13)
-      this.opponent.stock = [...op.stock.values()]
+      this.opponent.stock = [...op.stock.values()];
+      [0, 1, 2, 3].map(i => {
+        const b = (op as any)["bench" + (i + 1)]
+        if (b) this.opponent.bench[i] = [...b?.values()]
+      })
     }
     [0, 1, 2, 3].map(i => {
       const p = (this.room.state.piles.get("pile") as any)["pile" + (i + 1)]

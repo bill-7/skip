@@ -11,8 +11,8 @@ import { Schema, type, ArraySchema, MapSchema, SetSchema, DataChange } from '@co
 export class Player extends Schema {
   @type(["number"]) public hand: ArraySchema<number> = new ArraySchema<number>();
   @type(["number"]) public stock: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public bench_1: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public bench_2: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public bench_3: ArraySchema<number> = new ArraySchema<number>();
-  @type(["number"]) public bench_4: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public bench1: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public bench2: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public bench3: ArraySchema<number> = new ArraySchema<number>();
+  @type(["number"]) public bench4: ArraySchema<number> = new ArraySchema<number>();
 }
