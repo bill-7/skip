@@ -11,7 +11,6 @@
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <span>{{room?.state | json}}</span>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="1">
       <div *ngFor="let pile of piles, let i = index">
@@ -25,8 +24,6 @@
       <app-card (click)="draw()" [n]="13"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <span>bench: {{player.bench | json}} <br><br>hand: {{player.hand | json}}
-        <br><br>piles: {{piles | json}}</span>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="4" [rowspan]="1">
