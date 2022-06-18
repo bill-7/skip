@@ -4,7 +4,7 @@
       <app-card *ngFor="let c of opponent?.hand" [n]="c"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <app-card [n]="opponent?.stock?.at(-1) || 14"></app-card>
+      <app-card [n]="opponent.stock[0] >= 0 ? opponent.stock[0] : 14"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="1">
       <app-card *ngFor="let c of opponent?.bench" [n]="c[0] >= 0 ? c[0] : 14"></app-card>
