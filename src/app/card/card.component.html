@@ -1,7 +1,7 @@
 <mat-card [style]="colour(n)" [class.mat-elevation-z0]="n==14" class="card-wrapper">
   <mat-card-content>
     <p class="number" [ngClass]="{ small: n == 0 || n == 13 }">
-      {{n == 0 ? '🐸'
+      {{n == 0 ? `🐸\n(${n})`
       : n == 13 ? "🌈"
       : n == 14 ? '&nbsp;'
       : n
