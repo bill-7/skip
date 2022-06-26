@@ -21,7 +21,7 @@ export class CardComponent implements OnInit {
     //14 - empty
     if (n == 14) return {
       background: "#f0f0f0",
-      border: "5px solid #e5e5e5"
+      border: "0.4vw solid #e5e5e5"
     }
     if (n == 13) return {
       background: `linear-gradient(180deg, rgba(255,90,90,1) 0%, rgba(255,179,103,1) 20%, rgba(255,253,116,1) 40%, rgba(141,255,130,1) 60%, rgba(139,213,234,1) 80%, rgba(206,157,255,1) 100%)`
