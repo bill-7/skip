@@ -35,7 +35,7 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <span *ngIf="!joined">Waiting for server to cold start...</span>
-      <span *ngIf="!opponent">Waiting for player 2 to join...</span>
+      <span *ngIf="!opponentHasJoined">Waiting for player 2 to join...</span>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="4" [rowspan]="1">

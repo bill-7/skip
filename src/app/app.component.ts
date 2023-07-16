@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   });
 
   joined = false;
+  opponentHasJoined = false;
   messages = [];
   piles = [] as number[][];
   player = this.default();
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit {
       });
     }
     if (op) {
+      this.opponentHasJoined = true;
       this.opponent.hand = [...op.hand.values()].map(() => 13);
       this.opponent.stock = [...op.stock.values()];
       [0, 1, 2, 3].map((i) => {
