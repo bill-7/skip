@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
       .then((room) => {
         this.room = room as Colyseus.Room<MyRoomState>;
         console.log(room.sessionId, "joined", room.name);
-        joined = true;
+        this.joined = true;
 
         room.onStateChange(this.handleStateUpdate);
       })
