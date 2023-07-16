@@ -5,19 +5,27 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <div class="stock">
-        <app-card [n]="opponent.stock[0] >= 0 ? opponent.stock[0] : 14"></app-card>
+        <app-card
+          [n]="opponent.stock[0] >= 0 ? opponent.stock[0] : 14"
+        ></app-card>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="1">
-      <app-card *ngFor="let c of opponent?.bench" [n]="c[0] >= 0 ? c[0] : 14"></app-card>
+      <app-card
+        *ngFor="let c of opponent?.bench"
+        [n]="c[0] >= 0 ? c[0] : 14"
+      ></app-card>
     </mat-grid-tile>
 
-    <mat-grid-tile [colspan]="2" [rowspan]="1">
-    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1"> </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="1">
       <div *ngFor="let pile of piles, let i = index">
-        <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="piles[i]"
-          (cdkDropListDropped)="drop($event)">
+        <div
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          [cdkDropListData]="piles[i]"
+          (cdkDropListDropped)="drop($event)"
+        >
           <app-card [n]="pile[0] >= 0 ? pile[0] : 14"></app-card>
         </div>
       </div>
@@ -26,29 +34,47 @@
       <app-card (click)="draw()" [n]="13"></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <span *ngIf="!joined">Waiting for server to cold start...</span>
+      <span *ngIf="!opponentHasJoined">Waiting for player 2 to join...</span>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="4" [rowspan]="1">
       <div *ngFor="let bench of player.bench, let i = index">
-        <div cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="player.bench[i]"
-          (cdkDropListDropped)="drop($event)">
+        <div
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          [cdkDropListData]="player.bench[i]"
+          (cdkDropListDropped)="drop($event)"
+        >
           <app-card cdkDrag [n]="bench[0] >= 0 ? bench[0] : 14"></app-card>
         </div>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <div class="selected" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="player.stock"
-        (cdkDropListDropped)="drop($event)">
-        <app-card cdkDrag [n]="player.stock[0] >= 0 ? player.stock[0] : 14"></app-card>
+      <div
+        class="selected"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        [cdkDropListData]="player.stock"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <app-card
+          cdkDrag
+          [n]="player.stock[0] >= 0 ? player.stock[0] : 14"
+        ></app-card>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="player.hand"
-      (cdkDropListDropped)="drop($event)" [colspan]="5" [rowspan]="1">
+    <mat-grid-tile
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      [cdkDropListData]="player.hand"
+      (cdkDropListDropped)="drop($event)"
+      [colspan]="5"
+      [rowspan]="1"
+    >
       <app-card cdkDrag *ngFor="let c of player.hand" [n]="c"></app-card>
     </mat-grid-tile>
   </mat-grid-list>
-
-
 
   <div *ngFor="let message of messages">
     <span>{{ message }}</span>
